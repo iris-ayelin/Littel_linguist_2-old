@@ -1,0 +1,45 @@
+.title-container {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.title {
+  font-size: 24px;
+  color: #3f51b5;
+}
+
+.game-card {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.target-word {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.mat-form-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.feedback {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.correct-feedback {
+  color: green;
+}
+
+.incorrect-feedback {
+  color: red;
+}
