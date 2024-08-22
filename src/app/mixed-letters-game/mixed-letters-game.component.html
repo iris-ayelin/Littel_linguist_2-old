@@ -1,25 +1,35 @@
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+
 <div class="title-container">
-    <h1 class="title">Mixed Letters - {{ currentCategory?.name }}</h1>
-  </div>
-  
-  <div *ngIf="randomWord">
-    <mat-card class="game-card">
-      <mat-card-header>
-        <mat-card-title>{{ originWord }}</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <p class="target-word">{{ randomWord.target }}</p>
-        <mat-form-field appearance="fill">
-          <mat-label>Your Guess</mat-label>
-          <input matInput [(ngModel)]="userGuess" placeholder="Enter your guess">
-        </mat-form-field>
-        <div class="button-group">
-          <button mat-raised-button color="primary" (click)="checkGuess()">Submit</button>
-          <button mat-raised-button color="warn" (click)="resetForm()">Reset</button>
-          <button mat-raised-button color="accent" (click)="exitGame()">Exit</button>
-        </div>
-        <p *ngIf="feedbackCorrect" [ngClass]="feedbackIncorrect" class="feedbackIncorrect">{{ feedbackCorrect }}</p>
-      </mat-card-content>
-    </mat-card>
-  </div>
-  
+  <h1 class="title">Mixed Letters - {{ currentCategory?.name }}</h1>
+</div>
+
+<div *ngIf="randomWord">
+  <mat-card class="game-card">
+    <mat-card-header>
+      <mat-card-title>{{ originWord }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p class="target-word">{{ randomWord.target }}</p>
+      <mat-form-field appearance="fill">
+        <mat-label>Your Guess</mat-label>
+        <input matInput [(ngModel)]="userGuess" placeholder="Enter your guess" aria-label="Guess input">
+      </mat-form-field>
+      <div class="button-group">
+        <button mat-mini-fab [disabled]="userGuess.length <= 0" aria-disabled="true" color="primary" (click)="checkGuess()">
+          <mat-icon>emoji_objects</mat-icon> <!-- Magic wand icon -->
+        </button>
+        <button mat-mini-fab [disabled]="userGuess.length <= 0" aria-label="" color="primary" (click)="resetForm()">
+          <mat-icon>autorenew</mat-icon> <!-- Fun reset icon -->
+        </button>
+        <button mat-mini-fab aria-label="exit" color="accent" (click)="exitGame()">
+          <mat-icon>logout</mat-icon> <!-- Exit icon with a twist -->
+        </button>
+        
+      </div>
+      <p [ngClass]="isCorrect ? 'feedbackCorrect' : 'feedbackIncorrect'">
+        {{ feedbackMessage }}
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>
