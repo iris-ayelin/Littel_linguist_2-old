@@ -3,9 +3,9 @@
 <div class="title-container">
   <h1 class="title">Mixed Letters - {{ currentCategory?.name }}</h1>
 </div>
-
 <div *ngIf="randomWord">
   <mat-card class="game-card">
+    <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
     <mat-card-header>
       <mat-card-title>{{ originWord }}</mat-card-title>
     </mat-card-header>
@@ -17,19 +17,16 @@
       </mat-form-field>
       <div class="button-group">
         <button mat-mini-fab [disabled]="userGuess.length <= 0" aria-disabled="true" color="primary" (click)="checkGuess()">
-          <mat-icon>emoji_objects</mat-icon> <!-- Magic wand icon -->
+          <mat-icon>spellcheck</mat-icon>
         </button>
         <button mat-mini-fab [disabled]="userGuess.length <= 0" aria-label="" color="primary" (click)="resetForm()">
-          <mat-icon>autorenew</mat-icon> <!-- Fun reset icon -->
+          <mat-icon>autorenew</mat-icon>
         </button>
         <button mat-mini-fab aria-label="exit" color="accent" (click)="exitGame()">
-          <mat-icon>logout</mat-icon> <!-- Exit icon with a twist -->
+          <mat-icon>logout</mat-icon>
         </button>
-        
       </div>
-      <p [ngClass]="isCorrect ? 'feedbackCorrect' : 'feedbackIncorrect'">
-        {{ feedbackMessage }}
-      </p>
+      <p [ngClass]="isCorrect ? 'feedbackCorrect' : 'feedbackIncorrect'">{{ feedbackMessage }}</p>
     </mat-card-content>
   </mat-card>
 </div>

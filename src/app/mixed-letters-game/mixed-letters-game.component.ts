@@ -16,6 +16,7 @@ import { ConfirmExitDialogComponent } from "../confirm-exit-dialog/confirm-exit-
 import { MatButtonModule } from "@angular/material/button";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatIconModule } from "@angular/material/icon";
+import { MatProgressBarModule } from "@angular/material/progress-bar";
 
 @Component({
   selector: "app-mixed-letters-game",
@@ -29,6 +30,7 @@ import { MatIconModule } from "@angular/material/icon";
     MatButtonModule,
     MatDividerModule,
     MatIconModule,
+    MatProgressBarModule
   ],
   templateUrl: "./mixed-letters-game.component.html",
   styleUrls: ["./mixed-letters-game.component.css"],
@@ -99,13 +101,10 @@ export class MixedLettersGameComponent implements OnInit {
     if ((this.isCorrect = inputWord)) {
       (this.feedbackMessage = "Correct! Guess the next word"),
         (this.isCorrect = true);
+        this.userGuess = "";
+        this.setRandomWord();
     } else {
       this.feedbackMessage = "Try again!";
-    }
-    
-    if (isCorrect) {
-      this.userGuess = "";
-      this.setRandomWord();
     }
   }
 
