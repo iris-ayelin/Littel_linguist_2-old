@@ -2,6 +2,7 @@ import { CommonModule } from "@angular/common";
 import {
   ChangeDetectionStrategy,
   Component,
+  inject,
   Input,
   OnInit,
 } from "@angular/core";
@@ -17,6 +18,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatIconModule } from "@angular/material/icon";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
+import { MatDialog } from "@angular/material/dialog";
 
 @Component({
   selector: "app-mixed-letters-game",
@@ -43,12 +45,13 @@ export class MixedLettersGameComponent implements OnInit {
   originWord: string | null = null;
   userGuess: string = "";
   feedbackCorrect: string = "";
-  dialog: any;
   isCorrect: boolean = false;
   feedbackMessage: string | undefined;
   inputWord: string = "";
   progressValue: number = 0;
   incrementValue: number = 0;
+  readonly dialog = inject(MatDialog);
+  confirm = false
 
   constructor(
     private categoriesService: CategoriesService,
@@ -129,8 +132,12 @@ export class MixedLettersGameComponent implements OnInit {
     this.userGuess = "";
     this.feedbackCorrect = "";
   }
+  
+  openConfirmDialog() {
+    this.dialog.open(ConfirmExitDialogComponent);
+  }
 
   exitGame(): void {
-    this.router.navigate(["lets-play"]);
+    this.openConfirmDialog()
   }
 }
