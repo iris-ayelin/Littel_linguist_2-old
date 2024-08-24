@@ -5,7 +5,7 @@
 </div>
 <div *ngIf="randomWord">
   <mat-card class="game-card">
-    <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+    <mat-progress-bar mode="determinate" [value]="progressValue"></mat-progress-bar>
     <mat-card-header>
       <mat-card-title>{{ originWord }}</mat-card-title>
     </mat-card-header>

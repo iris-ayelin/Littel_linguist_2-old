@@ -47,18 +47,19 @@ export class MixedLettersGameComponent implements OnInit {
   isCorrect: boolean = false;
   feedbackMessage: string | undefined;
   inputWord: string = "";
+  progressValue: number = 0;
+  incrementValue: number = 0;
 
   constructor(
     private categoriesService: CategoriesService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       const categoryId = parseInt(params.get("id") || "null");
       this.currentCategory = this.categoriesService.get(categoryId);
-
       if (this.currentCategory) {
         this.setRandomWord();
       }
@@ -94,17 +95,33 @@ export class MixedLettersGameComponent implements OnInit {
   }
 
   checkGuess(): void {
-    const isCorrect = false;
-    const inputWord =
-      this.userGuess.trim().toLowerCase() ===
-      this.randomWord?.origin.toLowerCase();
+    const inputWord = this.userGuess.trim().toLowerCase() === this.randomWord?.origin.toLowerCase();
     if ((this.isCorrect = inputWord)) {
       (this.feedbackMessage = "Correct! Guess the next word"),
         (this.isCorrect = true);
         this.userGuess = "";
         this.setRandomWord();
+        this.calculateIncrementValue()
+        this.handleCorrectAnswer();
     } else {
       this.feedbackMessage = "Try again!";
+    }
+  }
+
+  calculateIncrementValue() {
+    if(this.currentCategory){
+      const totalWords = this.currentCategory.words.length;
+      if (totalWords) {
+        this.incrementValue = 100 / totalWords;
+        console.log(this.incrementValue)
+      }
+    }
+  }
+
+  handleCorrectAnswer() {
+    this.progressValue += this.incrementValue;
+    if (this.progressValue >= 100) {
+      this.progressValue = 100;
     }
   }
 
